@@ -866,11 +866,11 @@ body {
     min-height: calc(100vh - 60px);
   }
   
-  /* Riduci drasticamente padding sezioni per mobile */
+  /* Padding equilibrato per visibilità contenuto */
   .services-section,
   .about-section,
   .contact-section {
-    padding: 0.5rem 0;
+    padding: 1.5rem 0;
   }
   
   .hero-logo-img {
@@ -905,15 +905,15 @@ body {
   }
   
   .section-title {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     text-align: center;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
   }
   
   .section-subtitle {
-    font-size: 0.95rem;
+    font-size: 1rem;
     text-align: center;
-    margin-bottom: 0.8rem;
+    margin-bottom: 1.5rem;
   }
   
   .hero-guarantee {
@@ -922,16 +922,16 @@ body {
     padding: 0.8rem;
   }
   
-  /* Ottimizza grid spacing */
+  /* Ottimizza grid spacing mantenendo leggibilità */
   .services-grid,
   .contact-grid {
-    gap: 0.8rem;
-    margin: 0.5rem 0;
+    gap: 1.2rem;
+    margin: 1rem 0;
   }
   
   .about-header,
   .contact-header {
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
   }
   
   /* Compatta about section */
@@ -944,10 +944,10 @@ body {
     line-height: 1.5;
   }
   
-  /* Riduci padding interno delle card */
+  /* Padding card bilanciato */
   .service-card,
   .contact-card {
-    padding: 1.2rem;
+    padding: 1.5rem;
   }
   
   /* Ottimizza hero section spacing */
@@ -960,14 +960,14 @@ body {
     margin-bottom: 0.3rem;
   }
   
-  /* Elimina margini eccessivi tra sezioni */
+  /* Riduci marginalmente i gap tra sezioni */
   .section:not(.hero-section) {
-    margin-top: -1rem;
+    margin-top: -0.5rem;
   }
   
-  /* Compatta ulteriormente hero section su mobile */
+  /* Compatta hero section ma mantieni visibilità */
   .hero-section {
-    padding-bottom: 0.5rem;
+    padding-bottom: 1rem;
   }
   
   /* Compatta business hours */
