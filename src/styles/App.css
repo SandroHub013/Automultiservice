@@ -870,7 +870,7 @@ body {
   .services-section,
   .about-section,
   .contact-section {
-    padding: 1rem 0;
+    padding: 0.5rem 0;
   }
   
   .hero-logo-img {
@@ -879,20 +879,20 @@ body {
   }
   
   .hero-subtitle {
-    font-size: 1rem;
+    font-size: 0.95rem;
     text-align: center;
-    margin-bottom: 2rem;
-    line-height: 1.5;
+    margin-bottom: 1.2rem;
+    line-height: 1.4;
   }
   
   .hero-stats {
     flex-direction: column;
-    gap: 0.8rem;
-    margin-bottom: 1.5rem;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
   }
   
   .stat {
-    padding: 1rem;
+    padding: 0.8rem;
     min-width: auto;
   }
   
@@ -905,15 +905,15 @@ body {
   }
   
   .section-title {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     text-align: center;
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.5rem;
   }
   
   .section-subtitle {
-    font-size: 1rem;
+    font-size: 0.95rem;
     text-align: center;
-    margin-bottom: 1.2rem;
+    margin-bottom: 0.8rem;
   }
   
   .hero-guarantee {
@@ -925,13 +925,13 @@ body {
   /* Ottimizza grid spacing */
   .services-grid,
   .contact-grid {
-    gap: 1rem;
-    margin: 1rem 0;
+    gap: 0.8rem;
+    margin: 0.5rem 0;
   }
   
   .about-header,
   .contact-header {
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
   }
   
   /* Compatta about section */
@@ -952,17 +952,22 @@ body {
   
   /* Ottimizza hero section spacing */
   .hero-cta {
-    margin: 1.2rem 0;
+    margin: 0.8rem 0;
   }
   
   .hero-guarantee {
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.3rem;
   }
   
   /* Elimina margini eccessivi tra sezioni */
   .section:not(.hero-section) {
-    margin-top: -0.5rem;
+    margin-top: -1rem;
+  }
+  
+  /* Compatta ulteriormente hero section su mobile */
+  .hero-section {
+    padding-bottom: 0.5rem;
   }
   
   /* Compatta business hours */
