@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://automultiservice.it/sitemap.xml
+
+# Optimize crawling
+Crawl-delay: 1
+
+# Block admin areas (if any)
+Disallow: /admin/
+Disallow: /private/
+
+# Allow all pages for SEO
+Allow: /
+Allow: /servizi
+Allow: /chi-siamo
+Allow: /contatti
