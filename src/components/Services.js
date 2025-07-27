@@ -5,40 +5,84 @@ const Services = () => {
   const sectionRef = useRef(null);
 
   useEffect(() => {
+    // Mobile-friendly intersection observer with fallback
+    const isMobile = window.innerWidth <= 768;
+    const threshold = isMobile ? 0.1 : 0.3;
+    
+    // Fallback visibility timer for mobile devices
+    const fallbackTimer = setTimeout(() => {
+      if (sectionRef.current) {
+        const cards = sectionRef.current.querySelectorAll('.service-card');
+        const title = sectionRef.current.querySelector('.section-title');
+        cards.forEach(card => {
+          card.style.opacity = '1';
+          card.style.visibility = 'visible';
+          card.style.transform = 'translateY(0)';
+        });
+        if (title) {
+          title.style.opacity = '1';
+          title.style.visibility = 'visible';
+          title.style.transform = 'translateY(0)';
+        }
+      }
+    }, isMobile ? 500 : 2000);
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            anime({
-              targets: entry.target.querySelectorAll('.service-card'),
-              opacity: [0, 1],
-              translateY: [50, 0],
-              rotateX: [-10, 0],
-              delay: anime.stagger(200),
-              duration: 800,
-              easing: 'easeOutExpo'
-            });
+            clearTimeout(fallbackTimer);
+            
+            try {
+              anime({
+                targets: entry.target.querySelectorAll('.service-card'),
+                opacity: [0, 1],
+                translateY: [50, 0],
+                rotateX: [-10, 0],
+                delay: anime.stagger(200),
+                duration: 800,
+                easing: 'easeOutExpo'
+              });
 
-            anime({
-              targets: entry.target.querySelector('.section-title'),
-              opacity: [0, 1],
-              translateY: [30, 0],
-              duration: 600,
-              easing: 'easeOutExpo'
-            });
+              anime({
+                targets: entry.target.querySelector('.section-title'),
+                opacity: [0, 1],
+                translateY: [30, 0],
+                duration: 600,
+                easing: 'easeOutExpo'
+              });
+            } catch (error) {
+              // Fallback if anime.js fails
+              console.warn('Animation failed, using fallback', error);
+              const cards = entry.target.querySelectorAll('.service-card');
+              const title = entry.target.querySelector('.section-title');
+              cards.forEach(card => {
+                card.style.opacity = '1';
+                card.style.visibility = 'visible';
+                card.style.transform = 'translateY(0)';
+              });
+              if (title) {
+                title.style.opacity = '1';
+                title.style.visibility = 'visible';
+                title.style.transform = 'translateY(0)';
+              }
+            }
 
             observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold, rootMargin: '50px' }
     );
 
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      clearTimeout(fallbackTimer);
+    };
   }, []);
 
   const services = [

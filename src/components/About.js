@@ -5,46 +5,88 @@ const About = () => {
   const sectionRef = useRef(null);
 
   useEffect(() => {
+    // Mobile-friendly intersection observer with fallback
+    const isMobile = window.innerWidth <= 768;
+    const threshold = isMobile ? 0.1 : 0.3;
+    
+    // Fallback visibility timer for mobile devices
+    const fallbackTimer = setTimeout(() => {
+      if (sectionRef.current) {
+        const content = sectionRef.current.querySelector('.about-content');
+        const image = sectionRef.current.querySelector('.about-image');
+        const features = sectionRef.current.querySelectorAll('.feature-item');
+        
+        [content, image, ...features].forEach(element => {
+          if (element) {
+            element.style.opacity = '1';
+            element.style.visibility = 'visible';
+            element.style.transform = 'translateX(0) translateY(0)';
+          }
+        });
+      }
+    }, isMobile ? 500 : 2000);
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const tl = anime.timeline({
-              easing: 'easeOutExpo'
-            });
+            clearTimeout(fallbackTimer);
+            
+            try {
+              const tl = anime.timeline({
+                easing: 'easeOutExpo'
+              });
 
-            tl.add({
-              targets: entry.target.querySelector('.about-content'),
-              opacity: [0, 1],
-              translateX: [-50, 0],
-              duration: 800
-            })
-            .add({
-              targets: entry.target.querySelector('.about-image'),
-              opacity: [0, 1],
-              translateX: [50, 0],
-              duration: 800
-            }, '-=600')
-            .add({
-              targets: entry.target.querySelectorAll('.feature-item'),
-              opacity: [0, 1],
-              translateY: [30, 0],
-              delay: anime.stagger(150),
-              duration: 600
-            }, '-=400');
+              tl.add({
+                targets: entry.target.querySelector('.about-content'),
+                opacity: [0, 1],
+                translateX: [-50, 0],
+                duration: 800
+              })
+              .add({
+                targets: entry.target.querySelector('.about-image'),
+                opacity: [0, 1],
+                translateX: [50, 0],
+                duration: 800
+              }, '-=600')
+              .add({
+                targets: entry.target.querySelectorAll('.feature-item'),
+                opacity: [0, 1],
+                translateY: [30, 0],
+                delay: anime.stagger(150),
+                duration: 600
+              }, '-=400');
+            } catch (error) {
+              // Fallback if anime.js fails
+              console.warn('Animation failed, using fallback', error);
+              const content = entry.target.querySelector('.about-content');
+              const image = entry.target.querySelector('.about-image');
+              const features = entry.target.querySelectorAll('.feature-item');
+              
+              [content, image, ...features].forEach(element => {
+                if (element) {
+                  element.style.opacity = '1';
+                  element.style.visibility = 'visible';
+                  element.style.transform = 'translateX(0) translateY(0)';
+                }
+              });
+            }
 
             observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold, rootMargin: '50px' }
     );
 
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      clearTimeout(fallbackTimer);
+    };
   }, []);
 
   const features = [

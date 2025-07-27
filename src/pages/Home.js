@@ -8,27 +8,55 @@ import Contact from '../components/Contact';
 
 const Home = () => {
   useEffect(() => {
-    // Smooth entrance animations
-    anime({
-      targets: '.fade-in',
-      opacity: [0, 1],
-      translateY: [30, 0],
-      delay: anime.stagger(200),
-      duration: 800,
-      easing: 'easeOutExpo'
-    });
+    const isMobile = window.innerWidth <= 768;
+    
+    // Fallback visibility timer for mobile devices
+    const fallbackTimer = setTimeout(() => {
+      const fadeElements = document.querySelectorAll('.fade-in');
+      fadeElements.forEach(element => {
+        element.style.opacity = '1';
+        element.style.visibility = 'visible';
+        element.style.transform = 'translateY(0)';
+      });
+    }, isMobile ? 300 : 1000);
 
-    // Floating animation for background elements
-    anime({
-      targets: '.floating-element',
-      translateY: [
-        { value: -15, duration: 2000 },
-        { value: 15, duration: 2000 }
-      ],
-      loop: true,
-      direction: 'alternate',
-      easing: 'easeInOutSine'
-    });
+    try {
+      // Smooth entrance animations
+      anime({
+        targets: '.fade-in',
+        opacity: [0, 1],
+        translateY: [30, 0],
+        delay: anime.stagger(200),
+        duration: 800,
+        easing: 'easeOutExpo',
+        complete: () => clearTimeout(fallbackTimer)
+      });
+
+      // Only animate floating elements on desktop for better mobile performance
+      if (!isMobile) {
+        anime({
+          targets: '.floating-element',
+          translateY: [
+            { value: -15, duration: 2000 },
+            { value: 15, duration: 2000 }
+          ],
+          loop: true,
+          direction: 'alternate',
+          easing: 'easeInOutSine'
+        });
+      }
+    } catch (error) {
+      console.warn('Animation failed, using fallback', error);
+      const fadeElements = document.querySelectorAll('.fade-in');
+      fadeElements.forEach(element => {
+        element.style.opacity = '1';
+        element.style.visibility = 'visible';
+        element.style.transform = 'translateY(0)';
+      });
+      clearTimeout(fallbackTimer);
+    }
+
+    return () => clearTimeout(fallbackTimer);
   }, []);
 
   return (
