@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import Navigation from './components/Navigation';
 import TurboWrapper from './components/TurboWrapper';
 import FeatureBlocked from './components/FeatureBlocked';
@@ -69,6 +70,9 @@ function App() {
             <div className="floating-element gear-2"></div>
             <div className="floating-element gear-3"></div>
           </div>
+          
+          {/* Vercel Analytics */}
+          <Analytics />
         </div>
       </TurboWrapper>
     </Router>
