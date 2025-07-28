@@ -1,0 +1,429 @@
+/* ===================================
+   PWA INSTALLER COMPONENTS
+   AutoMultiService S.a.S.
+   ================================== */
+
+/* PWA Install Prompt */
+.pwa-install-prompt {
+  position: fixed;
+  bottom: var(--mobile-space-4);
+  left: var(--mobile-space-4);
+  right: var(--mobile-space-4);
+  z-index: 1000;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.15),
+    0 4px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(220, 53, 69, 0.1);
+  animation: slideInUp 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.pwa-prompt-content {
+  display: flex;
+  align-items: center;
+  gap: var(--mobile-space-4);
+  padding: var(--mobile-space-4);
+}
+
+.pwa-prompt-icon {
+  font-size: 2rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.pwa-prompt-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.pwa-prompt-text h3 {
+  font-size: var(--mobile-text-lg);
+  font-weight: 700;
+  color: #333;
+  margin-bottom: var(--mobile-space-1);
+}
+
+.pwa-prompt-text p {
+  font-size: var(--mobile-text-sm);
+  color: #666;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.pwa-prompt-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mobile-space-2);
+  flex-shrink: 0;
+}
+
+/* PWA Floating Action Button */
+.pwa-install-fab {
+  position: fixed;
+  bottom: calc(var(--mobile-space-6) + 64px + var(--mobile-space-4));
+  right: var(--mobile-space-4);
+  z-index: 998;
+  background: linear-gradient(135deg, #dc3545, #c82333);
+  color: white;
+  border: none;
+  border-radius: 28px;
+  padding: var(--mobile-space-3) var(--mobile-space-4);
+  box-shadow: 
+    0 4px 16px rgba(220, 53, 69, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--mobile-space-2);
+  font-size: var(--mobile-text-sm);
+  font-weight: 600;
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fabPulse 3s infinite;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.pwa-install-fab:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 
+    0 8px 24px rgba(220, 53, 69, 0.5),
+    0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.pwa-install-fab:active {
+  transform: translateY(0) scale(0.95);
+}
+
+.pwa-fab-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.pwa-fab-text {
+  font-size: var(--mobile-text-sm);
+  font-weight: 600;
+}
+
+@keyframes fabPulse {
+  0%, 70%, 100% {
+    transform: scale(1);
+    box-shadow: 
+      0 4px 16px rgba(220, 53, 69, 0.4),
+      0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  35% {
+    transform: scale(1.05);
+    box-shadow: 
+      0 6px 20px rgba(220, 53, 69, 0.5),
+      0 3px 10px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* ===================================
+   iOS INSTALL INSTRUCTIONS MODAL
+   ================================== */
+
+.pwa-ios-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mobile-space-4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: fadeIn 300ms ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.pwa-ios-modal {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 100%;
+  max-height: 80vh;
+  overflow: hidden;
+  animation: modalSlideIn 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes modalSlideIn {
+  from {
+    transform: translateY(50px) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.pwa-ios-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--mobile-space-5) var(--mobile-space-5) var(--mobile-space-3);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.pwa-ios-header h3 {
+  font-size: var(--mobile-text-xl);
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+}
+
+.pwa-ios-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #666;
+  cursor: pointer;
+  padding: var(--mobile-space-2);
+  margin: calc(var(--mobile-space-2) * -1);
+  border-radius: 50%;
+  transition: all 200ms ease;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pwa-ios-close:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #333;
+}
+
+.pwa-ios-content {
+  padding: var(--mobile-space-4) var(--mobile-space-5);
+}
+
+.pwa-ios-step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--mobile-space-4);
+  margin-bottom: var(--mobile-space-5);
+}
+
+.pwa-ios-step:last-child {
+  margin-bottom: 0;
+}
+
+.pwa-ios-step-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #dc3545, #c82333);
+  color: white;
+  border-radius: 50%;
+  font-size: var(--mobile-text-sm);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.pwa-ios-step-text {
+  font-size: var(--mobile-text-base);
+  color: #333;
+  line-height: 1.6;
+  padding-top: var(--mobile-space-1);
+}
+
+.pwa-ios-step-text strong {
+  font-weight: 700;
+  color: #dc3545;
+}
+
+.ios-share-icon,
+.ios-add-icon {
+  display: inline-block;
+  background: #007AFF;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin: 0 2px;
+  vertical-align: middle;
+}
+
+.ios-add-icon {
+  background: #34C759;
+}
+
+.pwa-ios-footer {
+  padding: var(--mobile-space-3) var(--mobile-space-5) var(--mobile-space-5);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* ===================================
+   RESPONSIVE ADJUSTMENTS
+   ================================== */
+
+/* Small mobile devices */
+@media screen and (max-width: 480px) {
+  .pwa-install-prompt {
+    bottom: var(--mobile-space-3);
+    left: var(--mobile-space-3);
+    right: var(--mobile-space-3);
+  }
+  
+  .pwa-prompt-content {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--mobile-space-3);
+  }
+  
+  .pwa-prompt-actions {
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .pwa-install-fab {
+    bottom: calc(var(--mobile-space-4) + 56px + var(--mobile-space-3));
+    right: var(--mobile-space-3);
+    padding: var(--mobile-space-2) var(--mobile-space-3);
+  }
+  
+  .pwa-fab-text {
+    display: none;
+  }
+  
+  .pwa-ios-modal {
+    margin: var(--mobile-space-2);
+    max-height: calc(100vh - var(--mobile-space-4));
+  }
+}
+
+/* Large mobile devices */
+@media screen and (min-width: 576px) {
+  .pwa-install-prompt {
+    max-width: 400px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+  
+  .pwa-prompt-actions {
+    flex-direction: row;
+  }
+}
+
+/* Tablets and Desktop */
+@media screen and (min-width: 768px) {
+  .pwa-install-prompt {
+    bottom: var(--mobile-space-6);
+    left: auto;
+    right: var(--mobile-space-6);
+    transform: none;
+    max-width: 380px;
+  }
+  
+  .pwa-install-fab {
+    bottom: calc(var(--mobile-space-8) + 68px + var(--mobile-space-6));
+    right: var(--mobile-space-6);
+  }
+}
+
+/* ===================================
+   ACCESSIBILITY & INTERACTION STATES
+   ================================== */
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .pwa-install-prompt {
+    border: 2px solid #333;
+    background: #fff;
+  }
+  
+  .pwa-install-fab {
+    background: #000;
+    border: 2px solid #fff;
+  }
+  
+  .pwa-ios-modal {
+    border: 2px solid #333;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .pwa-install-prompt {
+    animation: none;
+  }
+  
+  .pwa-install-fab {
+    animation: none;
+  }
+  
+  .pwa-install-fab:hover {
+    transform: none;
+  }
+  
+  .pwa-ios-modal {
+    animation: none;
+  }
+  
+  .pwa-ios-modal-backdrop {
+    animation: none;
+  }
+}
+
+/* Focus management for keyboard navigation */
+.pwa-install-fab:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.pwa-ios-close:focus-visible {
+  outline: 2px solid #dc3545;
+  outline-offset: 2px;
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .pwa-install-fab:hover {
+    transform: none;
+    box-shadow: 
+      0 4px 16px rgba(220, 53, 69, 0.4),
+      0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .pwa-install-fab:active {
+    transform: scale(0.95);
+  }
+  
+  .pwa-ios-close:hover {
+    background: none;
+  }
+  
+  .pwa-ios-close:active {
+    background: rgba(0, 0, 0, 0.1);
+  }
+}

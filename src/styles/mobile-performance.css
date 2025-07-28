@@ -1,0 +1,215 @@
+/* ===================================
+   MOBILE PERFORMANCE OPTIMIZATIONS
+   AutoMultiService S.a.S.
+   ================================== */
+
+/* GPU Acceleration for Mobile */
+.mobile-optimized * {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  perspective: 1000;
+}
+
+/* Optimize animations for mobile */
+.mobile-optimized .touch-feedback,
+.mobile-optimized .whatsapp-button,
+.mobile-optimized .mobile-menu-toggle,
+.mobile-optimized .service-card {
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Reduce painting on scroll */
+.mobile-optimized .navigation {
+  will-change: transform, background-color;
+  contain: layout style paint;
+}
+
+/* Optimize images for mobile */
+.mobile-optimized img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* Lazy loading placeholder */
+.image-placeholder {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Content jumping prevention */
+.mobile-optimized {
+  font-display: swap;
+}
+
+/* Improve scrolling performance */
+.mobile-optimized {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+/* Reduce layout shifts */
+.mobile-container {
+  contain: layout style paint;
+}
+
+.service-card {
+  contain: layout style paint;
+  min-height: 300px; /* Prevent layout shift */
+}
+
+/* Battery-conscious animations */
+@media (prefers-reduced-motion: reduce) {
+  .mobile-optimized * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Network-aware optimizations */
+@media (prefers-reduced-data: reduce) {
+  .desktop-only {
+    display: none !important;
+  }
+  
+  .whatsapp-pulse-ring {
+    animation: none;
+  }
+  
+  .pwa-install-fab {
+    animation: none;
+  }
+}
+
+/* Touch target optimization */
+.touch-device .touch-target {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 8px;
+}
+
+/* Prevent text selection on UI elements */
+.touch-device .btn,
+.touch-device .nav-menu a,
+.touch-device .mobile-menu-toggle,
+.touch-device .whatsapp-button {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* Optimize rendering layers */
+.mobile-optimized .floating-elements {
+  display: none; /* Hide on mobile for better performance */
+}
+
+@media screen and (min-width: 768px) {
+  .mobile-optimized .floating-elements {
+    display: block;
+  }
+}
+
+/* Critical CSS inlining helpers */
+.critical-above-fold {
+  contain: strict;
+}
+
+/* Prevent font flash */
+@font-face {
+  font-family: 'Inter';
+  font-display: swap;
+  src: local('Inter'), url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+}
+
+/* Optimize form inputs for mobile */
+.mobile-optimized input,
+.mobile-optimized textarea,
+.mobile-optimized select {
+  font-size: 16px; /* Prevent zoom on iOS */
+  border-radius: 8px;
+  padding: 12px;
+  border: 2px solid #ddd;
+  transition: border-color 200ms ease;
+}
+
+.mobile-optimized input:focus,
+.mobile-optimized textarea:focus,
+.mobile-optimized select:focus {
+  border-color: #dc3545;
+  outline: none;
+}
+
+/* Optimize modal performance */
+.modal-backdrop {
+  will-change: opacity;
+  contain: strict;
+}
+
+/* Efficient animations */
+@media (prefers-reduced-motion: no-preference) {
+  .mobile-optimized .slide-in {
+    animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .mobile-optimized .fade-in {
+    animation: fadeIn 0.4s ease-out;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Memory management for long pages */
+.mobile-optimized .virtualized-content {
+  contain: content;
+}
+
+/* Optimize video performance */
+.mobile-optimized video {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  background: #000;
+}
+
+/* Reduce repaints on scroll */
+.mobile-optimized .sticky-header {
+  position: -webkit-sticky;
+  position: sticky;
+  will-change: transform;
+  contain: layout style paint;
+}

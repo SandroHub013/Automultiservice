@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import anime from 'animejs';
+import MobileServiceCard from './MobileServiceCard';
 
 const Services = () => {
   const sectionRef = useRef(null);
@@ -132,43 +133,33 @@ const Services = () => {
   };
 
   return (
-    <section id="servizi" className="services-section section bg-light" ref={sectionRef}>
-      <div className="container">
-        <h2 className="section-title text-center">I Nostri Servizi</h2>
-        <p className="section-subtitle text-center text-gray">
+    <section id="servizi" className="services-section" ref={sectionRef}>
+      <div className="mobile-container">
+        <h2 className="mobile-title-1 section-title">I Nostri Servizi</h2>
+        <p className="mobile-body-large section-subtitle">
           25 anni di esperienza nel settore automobilistico
         </p>
         
         <div className="services-grid">
           {services.map((service, index) => (
-            <div key={index} className="service-card bg-white shadow">
-              <div className="service-icon">{service.icon}</div>
-              <h3 className="service-title">{service.title}</h3>
-              <p className="service-description">{service.description}</p>
-              
-              <ul className="service-features">
-                {service.features.map((feature, idx) => (
-                  <li key={idx}>• {feature}</li>
-                ))}
-              </ul>
-              
-              <button 
-                className="btn btn-primary service-cta"
-                onClick={() => handleWhatsApp(service.title)}
-              >
-                Richiedi Preventivo
-              </button>
-            </div>
+            <MobileServiceCard
+              key={index}
+              service={service}
+              index={index}
+              onWhatsAppClick={handleWhatsApp}
+            />
           ))}
         </div>
         
-        <div className="services-cta text-center">
-          <h3>Non trovi il servizio che cerchi?</h3>
-          <p>Contattaci su WhatsApp per un consulto personalizzato</p>
+        <div className="services-cta">
+          <h3 className="mobile-title-2">Non trovi il servizio che cerchi?</h3>
+          <p className="mobile-body">Contattaci su WhatsApp per un consulto personalizzato</p>
           <button 
-            className="btn btn-whatsapp btn-lg"
+            className="btn btn-whatsapp btn-lg touch-target touch-feedback"
             onClick={() => handleWhatsApp('Consulto personalizzato')}
+            aria-label="Consulto gratuito su WhatsApp"
           >
+            <span className="btn-icon">💬</span>
             Consulto Gratuito su WhatsApp
           </button>
         </div>

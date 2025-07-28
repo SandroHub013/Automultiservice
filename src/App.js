@@ -1,10 +1,18 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import Navigation from './components/Navigation';
+import MobileWhatsAppButton from './components/MobileWhatsAppButton';
+import PWAInstaller from './components/PWAInstaller';
 import TurboWrapper from './components/TurboWrapper';
 import FeatureBlocked from './components/FeatureBlocked';
 import { FEATURE_FLAGS } from './config/features';
+import './styles/mobile-core.css';
+import './styles/mobile-navigation.css';
+import './styles/mobile-whatsapp.css';
+import './styles/mobile-components.css';
+import './styles/mobile-pwa.css';
+import './styles/mobile-performance.css';
 import './styles/App.css';
 import './styles/Locations.css';
 import './styles/Classics.css';
@@ -14,6 +22,88 @@ const Home = lazy(() => import('./pages/Home'));
 const AMSClassicsPage = lazy(() => import('./pages/AMSClassicsPage'));
 
 function App() {
+  useEffect(() => {
+    // Mobile viewport height fix for iOS Safari
+    const setViewportHeight = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+
+    setViewportHeight();
+    window.addEventListener('resize', setViewportHeight);
+    window.addEventListener('orientationchange', setViewportHeight);
+
+    // Register Service Worker for PWA functionality
+    const registerServiceWorker = async () => {
+      if ('serviceWorker' in navigator) {
+        try {
+          const registration = await navigator.serviceWorker.register('/sw.js');
+          console.log('Service Worker registered successfully:', registration);
+          
+          // Handle service worker updates
+          registration.addEventListener('updatefound', () => {
+            const newWorker = registration.installing;
+            if (newWorker) {
+              newWorker.addEventListener('statechange', () => {
+                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                  // New service worker available, show update notification
+                  if (window.confirm('Una nuova versione dell\'app è disponibile. Vuoi aggiornarla?')) {
+                    window.location.reload();
+                  }
+                }
+              });
+            }
+          });
+        } catch (error) {
+          console.error('Service Worker registration failed:', error);
+        }
+      }
+    };
+
+    // Preload critical mobile fonts
+    const preloadFont = (fontFamily, fontWeight = '400') => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'font';
+      link.type = 'font/woff2';
+      link.crossOrigin = 'anonymous';
+      link.href = `https://fonts.googleapis.com/css2?family=Inter:wght@${fontWeight}&display=swap`;
+      document.head.appendChild(link);
+    };
+
+    // Initialize mobile optimizations
+    const initializeMobileOptimizations = () => {
+      // Prevent zoom on input focus (iOS)
+      document.addEventListener('touchstart', () => {
+        const metaViewport = document.querySelector('meta[name="viewport"]');
+        if (metaViewport) {
+          metaViewport.setAttribute('content', 
+            'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'
+          );
+        }
+      }, { passive: true });
+
+      // Add mobile CSS classes
+      document.body.classList.add('mobile-optimized');
+      
+      // Detect touch capability
+      if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+        document.body.classList.add('touch-device');
+      }
+    };
+
+    registerServiceWorker();
+    preloadFont('Inter', '400');
+    preloadFont('Inter', '600');
+    preloadFont('Inter', '700');
+    initializeMobileOptimizations();
+
+    return () => {
+      window.removeEventListener('resize', setViewportHeight);
+      window.removeEventListener('orientationchange', setViewportHeight);
+    };
+  }, []);
+
   return (
     <Router>
       <TurboWrapper>
@@ -21,15 +111,29 @@ function App() {
           <Navigation />
           
           <Suspense fallback={
-            <div style={{
+            <div className="mobile-container" style={{
               display: 'flex',
+              flexDirection: 'column',
               justifyContent: 'center',
               alignItems: 'center',
               height: '100vh',
-              fontSize: '1.2rem',
-              color: '#dc3545'
+              gap: 'var(--mobile-space-4)'
             }}>
-              Caricamento...
+              <div style={{
+                width: '48px',
+                height: '48px',
+                border: '4px solid #f3f3f3',
+                borderTop: '4px solid #dc3545',
+                borderRadius: '50%',
+                animation: 'spin 1s linear infinite'
+              }}></div>
+              <div style={{
+                fontSize: 'var(--mobile-text-lg)',
+                color: '#dc3545',
+                fontWeight: '600'
+              }}>
+                Caricamento...
+              </div>
             </div>
           }>
             <Routes>
@@ -50,22 +154,14 @@ function App() {
             </Routes>
           </Suspense>
           
-          {/* WhatsApp Floating Button */}
-          <div className="whatsapp-float">
-            <a 
-              href="https://wa.me/393387487512?text=Ciao!%20Sono%20interessato%20ai%20vostri%20servizi"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="whatsapp-button"
-            >
-              <svg viewBox="0 0 24 24" className="whatsapp-icon">
-                <path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.566"/>
-              </svg>
-            </a>
-          </div>
+          {/* Enhanced Mobile WhatsApp Button */}
+          <MobileWhatsAppButton />
           
-          {/* Floating Background Elements */}
-          <div className="floating-elements">
+          {/* PWA Installer */}
+          <PWAInstaller />
+          
+          {/* Floating Background Elements - Desktop Only */}
+          <div className="floating-elements desktop-only">
             <div className="floating-element gear-1"></div>
             <div className="floating-element gear-2"></div>
             <div className="floating-element gear-3"></div>
