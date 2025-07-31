@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contatti - Automultiservice SAS</title>
+    <meta name="description" content="Contatta Automultiservice per i tuoi servizi automobilistici. Siamo a Milano, disponibili per assistenza e preventivi gratuiti. Chiamaci o scrivici.">
+    
+    <!-- Include all the same meta tags as index.html but for contact page -->
+    <link rel="canonical" href="https://automultiservice.it/contatti">
+    <link rel="stylesheet" href="/css/modern-design-system.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation (same as index.html) -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="flex items-center justify-between py-4">
+                <div class="navbar-brand">
+                    <img src="/images/logo.webp" alt="Automultiservice SAS" width="180" height="60" class="lazy" data-src="/images/logo.webp" data-webp="/images/logo.webp">
+                </div>
+                
+                <ul class="navbar-nav hidden md:flex">
+                    <li><a href="/" class="navbar-link">Home</a></li>
+                    <li><a href="/servizi" class="navbar-link">Servizi</a></li>
+                    <li><a href="/chi-siamo" class="navbar-link">Chi Siamo</a></li>
+                    <li><a href="/contatti" class="navbar-link active">Contatti</a></li>
+                </ul>
+                
+                <button class="mobile-menu md:hidden" id="mobile-menu-btn" aria-label="Apri menu">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="py-16 bg-primary text-white">
+        <div class="container">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Contattaci</h1>
+                <p class="text-xl opacity-90">
+                    Siamo qui per aiutarti con tutti i tuoi servizi automobilistici
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-16">
+        <div class="container">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="text-2xl font-semibold mb-0">Richiedi un Preventivo</h2>
+                    </div>
+                    <div class="card-body">
+                        <form id="contact-form" class="space-y-4" novalidate>
+                            <div class="form-group">
+                                <label for="name" class="form-label">Nome e Cognome *</label>
+                                <input 
+                                    type="text" 
+                                    id="name" 
+                                    name="name" 
+                                    class="form-input" 
+                                    required 
+                                    aria-describedby="name-error"
+                                    placeholder="Il tuo nome completo"
+                                >
+                                <div id="name-error" class="text-error text-sm mt-1 hidden" role="alert"></div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="form-group">
+                                    <label for="email" class="form-label">Email *</label>
+                                    <input 
+                                        type="email" 
+                                        id="email" 
+                                        name="email" 
+                                        class="form-input" 
+                                        required 
+                                        aria-describedby="email-error"
+                                        placeholder="tua@email.com"
+                                    >
+                                    <div id="email-error" class="text-error text-sm mt-1 hidden" role="alert"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="phone" class="form-label">Telefono</label>
+                                    <input 
+                                        type="tel" 
+                                        id="phone" 
+                                        name="phone" 
+                                        class="form-input" 
+                                        aria-describedby="phone-error"
+                                        placeholder="+39 xxx xxx xxxx"
+                                    >
+                                    <div id="phone-error" class="text-error text-sm mt-1 hidden" role="alert"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="service" class="form-label">Tipo di Servizio</label>
+                                <select id="service" name="service" class="form-input">
+                                    <option value="">Seleziona un servizio</option>
+                                    <option value="manutenzione">Manutenzione Ordinaria</option>
+                                    <option value="riparazioni">Riparazioni</option>
+                                    <option value="assistenza-stradale">Assistenza Stradale</option>
+                                    <option value="pneumatici">Servizi Pneumatici</option>
+                                    <option value="carrozzeria">Carrozzeria</option>
+                                    <option value="consulenza">Consulenza Tecnica</option>
+                                    <option value="altro">Altro</option>
+                                </select>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="form-group">
+                                    <label for="car-brand" class="form-label">Marca Auto</label>
+                                    <input 
+                                        type="text" 
+                                        id="car-brand" 
+                                        name="car-brand" 
+                                        class="form-input"
+                                        placeholder="es. Fiat, BMW, Mercedes"
+                                    >
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="car-model" class="form-label">Modello</label>
+                                    <input 
+                                        type="text" 
+                                        id="car-model" 
+                                        name="car-model" 
+                                        class="form-input"
+                                        placeholder="es. 500, Serie 3, Classe A"
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message" class="form-label">Messaggio *</label>
+                                <textarea 
+                                    id="message" 
+                                    name="message" 
+                                    class="form-input form-textarea" 
+                                    rows="5" 
+                                    required 
+                                    aria-describedby="message-error"
+                                    placeholder="Descrivi il problema o il servizio di cui hai bisogno..."
+                                ></textarea>
+                                <div id="message-error" class="text-error text-sm mt-1 hidden" role="alert"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="flex items-start gap-3">
+                                    <input 
+                                        type="checkbox" 
+                                        id="privacy" 
+                                        name="privacy" 
+                                        required 
+                                        class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary"
+                                        aria-describedby="privacy-error"
+                                    >
+                                    <span class="text-sm text-gray-600">
+                                        Accetto la <a href="/privacy-policy" class="text-primary hover:underline">Privacy Policy</a> 
+                                        e autorizzo il trattamento dei miei dati personali per finalità di contatto. *
+                                    </span>
+                                </label>
+                                <div id="privacy-error" class="text-error text-sm mt-1 hidden" role="alert"></div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-full" id="submit-btn">
+                                <span id="submit-text">Invia Richiesta</span>
+                                <span id="submit-loading" class="hidden">Invio in corso...</span>
+                            </button>
+
+                            <div id="form-success" class="hidden bg-success bg-opacity-10 border border-success text-success p-4 rounded-lg" role="alert">
+                                <h3 class="font-semibold mb-1">Messaggio inviato con successo!</h3>
+                                <p class="text-sm">Ti contatteremo il prima possibile per fornirti tutte le informazioni richieste.</p>
+                            </div>
+
+                            <div id="form-error" class="hidden bg-error bg-opacity-10 border border-error text-error p-4 rounded-lg" role="alert">
+                                <h3 class="font-semibold mb-1">Errore nell'invio</h3>
+                                <p class="text-sm">Si è verificato un problema. Riprova più tardi o contattaci direttamente.</p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="space-y-6">
+                    <!-- Contact Details -->
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="text-2xl font-semibold mb-6">Informazioni di Contatto</h2>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-4">
+                                    <div class="service-icon w-12 h-12 text-lg">
+                                        📍
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold mb-1">Indirizzo</h3>
+                                        <p class="text-gray-600">
+                                            Via Example 123<br>
+                                            20100 Milano (MI)<br>
+                                            Italia
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-4">
+                                    <div class="service-icon w-12 h-12 text-lg">
+                                        📞
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold mb-1">Telefono</h3>
+                                        <p class="text-gray-600">
+                                            <a href="tel:+390212345678" class="text-primary hover:underline">
+                                                +39 02 1234567
+                                            </a>
+                                        </p>
+                                        <p class="text-sm text-gray-500">Assistenza 24/7 disponibile</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-4">
+                                    <div class="service-icon w-12 h-12 text-lg">
+                                        ✉️
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold mb-1">Email</h3>
+                                        <p class="text-gray-600">
+                                            <a href="mailto:info@automultiservice.it" class="text-primary hover:underline">
+                                                info@automultiservice.it
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Opening Hours -->
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="text-2xl font-semibold mb-6">Orari di Apertura</h2>
+                            
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                    <span class="font-medium">Lunedì - Venerdì</span>
+                                    <span class="text-gray-600">08:00 - 18:00</span>
+                                </div>
+                                <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                    <span class="font-medium">Sabato</span>
+                                    <span class="text-gray-600">09:00 - 13:00</span>
+                                </div>
+                                <div class="flex justify-between items-center py-2">
+                                    <span class="font-medium">Domenica</span>
+                                    <span class="text-gray-600">Chiuso</span>
+                                </div>
+                                <div class="bg-secondary bg-opacity-10 p-3 rounded-lg mt-4">
+                                    <p class="text-sm text-secondary font-medium">
+                                        🚨 Assistenza stradale disponibile 24 ore su 24, 7 giorni su 7
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Emergency Contact -->
+                    <div class="card bg-error bg-opacity-5 border-error">
+                        <div class="card-body">
+                            <h2 class="text-2xl font-semibold mb-4 text-error">Emergenze</h2>
+                            <p class="text-gray-700 mb-4">
+                                Per assistenza stradale urgente, chiamaci immediatamente:
+                            </p>
+                            <a href="tel:+393451234567" class="btn btn-secondary btn-lg w-full">
+                                🚨 Numero Emergenze: +39 345 123 4567
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map Section -->
+            <div class="mt-16">
+                <h2 class="text-3xl font-bold text-center mb-8">Come Raggiungerci</h2>
+                <div class="card">
+                    <div class="aspect-video bg-gray-200 rounded-lg overflow-hidden">
+                        <!-- Replace with actual Google Maps embed -->
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2970.118736388462!2d9.186516315454264!3d45.46442397910134!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786c1493f1275e7%3A0x3cffcd13c6740e8d!2sDuomo%20di%20Milano!5e0!3m2!1sit!2sit!4v1647875234567!5m2!1sit!2sit"
+                            width="100%" 
+                            height="100%" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Mappa della sede Automultiservice SAS">
+                        </iframe>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="text-lg font-semibold mb-2">Informazioni sulla Posizione</h3>
+                        <p class="text-gray-600">
+                            La nostra officina si trova in una posizione strategica facilmente raggiungibile 
+                            sia con i mezzi pubblici che in auto. Disponiamo di parcheggio gratuito per i clienti.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (same as index.html) -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Automultiservice SAS</h3>
+                    <p class="text-gray-300 mb-4">
+                        La tua officina di fiducia a Milano per tutti i servizi automobilistici.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Servizi</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="/servizi/manutenzione" class="hover:text-white">Manutenzione</a></li>
+                        <li><a href="/servizi/riparazioni" class="hover:text-white">Riparazioni</a></li>
+                        <li><a href="/servizi/assistenza-stradale" class="hover:text-white">Assistenza Stradale</a></li>
+                        <li><a href="/servizi/pneumatici" class="hover:text-white">Pneumatici</a></li>
+                        <li><a href="/servizi/carrozzeria" class="hover:text-white">Carrozzeria</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contatti</h3>
+                    <div class="space-y-2 text-gray-300">
+                        <p>📍 Via Example 123, Milano</p>
+                        <p>📞 <a href="tel:+390212345678" class="hover:text-white">+39 02 1234567</a></p>
+                        <p>✉️ <a href="mailto:info@automultiservice.it" class="hover:text-white">info@automultiservice.it</a></p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Orari di Apertura</h3>
+                    <div class="space-y-2 text-gray-300">
+                        <p>Lun - Ven: 08:00 - 18:00</p>
+                        <p>Sabato: 09:00 - 13:00</p>
+                        <p>Domenica: Chiuso</p>
+                        <p class="text-secondary">Assistenza 24/7 disponibile</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Automultiservice SAS. Tutti i diritti riservati.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/js/performance-optimization.js"></script>
+    <script>
+        // Form validation and submission
+        document.getElementById('contact-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Reset previous errors
+            document.querySelectorAll('.text-error').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.form-input').forEach(el => el.classList.remove('border-error'));
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Validate form
+            let isValid = true;
+            
+            if (!data.name.trim()) {
+                showError('name', 'Il nome è obbligatorio');
+                isValid = false;
+            }
+            
+            if (!data.email.trim()) {
+                showError('email', 'L\'email è obbligatoria');
+                isValid = false;
+            } else if (!isValidEmail(data.email)) {
+                showError('email', 'Inserisci un\'email valida');
+                isValid = false;
+            }
+            
+            if (!data.message.trim()) {
+                showError('message', 'Il messaggio è obbligatorio');
+                isValid = false;
+            }
+            
+            if (!data.privacy) {
+                showError('privacy', 'Devi accettare la privacy policy');
+                isValid = false;
+            }
+            
+            if (!isValid) return;
+            
+            // Show loading state
+            const submitBtn = document.getElementById('submit-btn');
+            const submitText = document.getElementById('submit-text');
+            const submitLoading = document.getElementById('submit-loading');
+            
+            submitBtn.disabled = true;
+            submitText.classList.add('hidden');
+            submitLoading.classList.remove('hidden');
+            
+            try {
+                // Simulate form submission (replace with actual endpoint)
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Show success message
+                document.getElementById('form-success').classList.remove('hidden');
+                document.getElementById('form-error').classList.add('hidden');
+                
+                // Reset form
+                this.reset();
+                
+                // Track form submission (replace with actual analytics)
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'form_submit', {
+                        event_category: 'engagement',
+                        event_label: 'contact_form'
+                    });
+                }
+                
+            } catch (error) {
+                // Show error message
+                document.getElementById('form-error').classList.remove('hidden');
+                document.getElementById('form-success').classList.add('hidden');
+                
+                console.error('Form submission error:', error);
+            } finally {
+                // Reset loading state
+                submitBtn.disabled = false;
+                submitText.classList.remove('hidden');
+                submitLoading.classList.add('hidden');
+            }
+        });
+        
+        function showError(fieldId, message) {
+            const errorElement = document.getElementById(fieldId + '-error');
+            const inputElement = document.getElementById(fieldId);
+            
+            errorElement.textContent = message;
+            errorElement.classList.remove('hidden');
+            inputElement.classList.add('border-error');
+        }
+        
+        function isValidEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+        
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const mobileNav = document.getElementById('mobile-nav');
+            mobileNav.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
