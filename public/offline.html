@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#dc3545" />
+  <title>Offline - AutoMultiService S.a.S.</title>
+  <style>
+    /* Mobile-first offline page styles */
+    :root {
+      --mobile-space-2: 0.5rem;
+      --mobile-space-4: 1rem;
+      --mobile-space-6: 1.5rem;
+      --mobile-space-8: 2rem;
+      --mobile-text-base: 1rem;
+      --mobile-text-lg: 1.125rem;
+      --mobile-text-xl: 1.25rem;
+      --mobile-text-2xl: 1.5rem;
+      --mobile-container-padding: 1rem;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      color: #333;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--mobile-container-padding);
+    }
+
+    .offline-container {
+      background: white;
+      border-radius: 16px;
+      padding: var(--mobile-space-8) var(--mobile-space-6);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+      border: 1px solid rgba(220, 53, 69, 0.1);
+    }
+
+    .offline-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto var(--mobile-space-6);
+      background: linear-gradient(135deg, #dc3545, #c82333);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: white;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.8; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .offline-title {
+      font-size: var(--mobile-text-2xl);
+      font-weight: 700;
+      color: #333;
+      margin-bottom: var(--mobile-space-4);
+    }
+
+    .offline-message {
+      font-size: var(--mobile-text-base);
+      color: #666;
+      margin-bottom: var(--mobile-space-6);
+      line-height: 1.6;
+    }
+
+    .offline-actions {
+      display: flex;
+      flex-direction: column;
+      gap: var(--mobile-space-4);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--mobile-space-2);
+      padding: var(--mobile-space-4) var(--mobile-space-6);
+      border: none;
+      border-radius: 8px;
+      font-size: var(--mobile-text-base);
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 300ms ease;
+      min-height: 48px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #dc3545, #c82333);
+      color: white;
+      box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(220, 53, 69, 0.4);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #dc3545;
+      border: 2px solid #dc3545;
+    }
+
+    .btn-secondary:hover {
+      background: #dc3545;
+      color: white;
+    }
+
+    .btn-whatsapp {
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      color: white;
+      box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
+    }
+
+    .btn-whatsapp:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
+    }
+
+    .offline-info {
+      margin-top: var(--mobile-space-6);
+      padding-top: var(--mobile-space-6);
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .company-info {
+      font-size: var(--mobile-text-base);
+      color: #555;
+      margin-bottom: var(--mobile-space-2);
+    }
+
+    .company-name {
+      font-weight: 700;
+      color: #dc3545;
+    }
+
+    .connection-status {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--mobile-space-2);
+      padding: var(--mobile-space-2) var(--mobile-space-4);
+      background: rgba(220, 53, 69, 0.1);
+      border-radius: 20px;
+      font-size: 0.875rem;
+      color: #dc3545;
+      margin-top: var(--mobile-space-4);
+    }
+
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #dc3545;
+      animation: blink 1.5s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0.3; }
+    }
+
+    /* Responsive adjustments */
+    @media screen and (min-width: 576px) {
+      .offline-container {
+        padding: var(--mobile-space-8);
+      }
+      
+      .offline-actions {
+        flex-direction: row;
+        justify-content: center;
+      }
+      
+      .btn {
+        min-width: 140px;
+      }
+    }
+
+    /* High contrast mode */
+    @media (prefers-contrast: high) {
+      .offline-container {
+        border: 2px solid #333;
+      }
+      
+      .btn-primary {
+        background: #000;
+        border: 2px solid #fff;
+      }
+      
+      .btn-secondary {
+        background: #fff;
+        color: #000;
+        border: 2px solid #000;
+      }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .offline-icon {
+        animation: none;
+      }
+      
+      .status-indicator {
+        animation: none;
+      }
+      
+      .btn:hover {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="offline-container">
+    <div class="offline-icon">
+      📱
+    </div>
+    
+    <h1 class="offline-title">Sei Offline</h1>
+    
+    <p class="offline-message">
+      Non sei connesso a Internet. Controlla la tua connessione e riprova, oppure contattaci direttamente su WhatsApp.
+    </p>
+    
+    <div class="offline-actions">
+      <button onclick="location.reload()" class="btn btn-primary">
+        🔄 Riprova
+      </button>
+      
+      <a 
+        href="https://wa.me/393387487512?text=Ciao!%20Sono%20interessato%20ai%20vostri%20servizi"
+        class="btn btn-whatsapp"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        💬 WhatsApp
+      </a>
+    </div>
+    
+    <div class="connection-status">
+      <div class="status-indicator"></div>
+      <span>Verifica connessione in corso...</span>
+    </div>
+    
+    <div class="offline-info">
+      <div class="company-info">
+        <span class="company-name">AutoMultiService S.a.S.</span>
+      </div>
+      <div class="company-info">
+        📍 Via Galliera, 62 - Minerbio (BO)
+      </div>
+      <div class="company-info">
+        📞 Tel: +39 338 748 7512
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Auto-retry connection check
+    let retryCount = 0;
+    const maxRetries = 5;
+    
+    function checkConnection() {
+      if (navigator.onLine) {
+        location.reload();
+      } else if (retryCount < maxRetries) {
+        retryCount++;
+        setTimeout(checkConnection, 5000);
+      }
+    }
+    
+    // Start checking connection after 2 seconds
+    setTimeout(checkConnection, 2000);
+    
+    // Listen for online event
+    window.addEventListener('online', () => {
+      location.reload();
+    });
+    
+    // Update connection status
+    const statusElement = document.querySelector('.connection-status span');
+    const statusIndicator = document.querySelector('.status-indicator');
+    
+    if (!navigator.onLine) {
+      statusElement.textContent = 'Connessione assente';
+      statusIndicator.style.background = '#dc3545';
+    }
+    
+    window.addEventListener('online', () => {
+      statusElement.textContent = 'Connessione ripristinata';
+      statusIndicator.style.background = '#25d366';
+    });
+    
+    window.addEventListener('offline', () => {
+      statusElement.textContent = 'Connessione persa';
+      statusIndicator.style.background = '#dc3545';
+    });
+  </script>
+</body>
+</html>

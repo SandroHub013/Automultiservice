@@ -1,0 +1,83 @@
+{
+  "short_name": "AutoMultiService",
+  "name": "AutoMultiService S.a.S. - Servizi Automobilistici",
+  "description": "AutoMultiService S.a.S. - 25 anni di esperienza nel settore automobilistico. Acquisto veicoli incidentati, ricambi usati garantiti, demolizione auto.",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "immagineintestazione.jpg",
+      "type": "image/jpeg",
+      "sizes": "192x192",
+      "purpose": "any"
+    },
+    {
+      "src": "immagineintestazione.jpg",
+      "type": "image/jpeg", 
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "immagineintestazione.jpg",
+      "type": "image/jpeg",
+      "sizes": "192x192",
+      "purpose": "maskable"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#dc3545",
+  "background_color": "#ffffff",
+  "scope": "/",
+  "lang": "it",
+  "dir": "ltr",
+  "categories": ["automotive", "business", "shopping"],
+  "screenshots": [
+    {
+      "src": "immagineintestazione.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "AutoMultiService Homepage Desktop"
+    },
+    {
+      "src": "immagineintestazione.jpg", 
+      "sizes": "750x1334",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "AutoMultiService Homepage Mobile"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Servizi Auto",
+      "short_name": "Servizi",
+      "description": "Visualizza tutti i nostri servizi automobilistici",
+      "url": "/#servizi",
+      "icons": [
+        {
+          "src": "immagineintestazione.jpg",
+          "sizes": "192x192",
+          "type": "image/jpeg"
+        }
+      ]
+    },
+    {
+      "name": "Contatta WhatsApp",
+      "short_name": "WhatsApp",
+      "description": "Contattaci direttamente su WhatsApp",
+      "url": "https://wa.me/393387487512?text=Ciao!%20Sono%20interessato%20ai%20vostri%20servizi",
+      "icons": [
+        {
+          "src": "immagineintestazione.jpg",
+          "sizes": "192x192", 
+          "type": "image/jpeg"
+        }
+      ]
+    }
+  ]
+}

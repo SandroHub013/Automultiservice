@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AutoMultiService Favicon Generator</title>
+    <style>
+        body { margin: 0; padding: 20px; background: #f8f9fa; color: #333; font-family: Arial, sans-serif; }
+        canvas { border: 1px solid #dc3545; background: #fff; }
+        .info { margin-top: 10px; }
+        button { background: #dc3545; color: white; border: none; padding: 10px 15px; margin: 5px; cursor: pointer; border-radius: 4px; }
+        button:hover { background: #c82333; }
+    </style>
+</head>
+<body>
+    <h1>🚗 AutoMultiService Favicon Generator</h1>
+    <canvas id="favicon" width="64" height="64"></canvas>
+    <div class="info">
+        <p>Generated AutoMultiService favicon (64x64)</p>
+        <button onclick="downloadFavicon()">Download as favicon.ico</button>
+        <button onclick="downloadPNG()">Download as PNG</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('favicon');
+        const ctx = canvas.getContext('2d');
+        
+        // AutoMultiService automotive favicon
+        function createFavicon() {
+            // White background
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, 64, 64);
+            
+            // Red border
+            ctx.strokeStyle = '#dc3545';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(2, 2, 60, 60);
+            
+            // Car silhouette in red
+            ctx.fillStyle = '#dc3545';
+            
+            // Simple car shape
+            // Car body
+            ctx.fillRect(10, 25, 44, 18);
+            
+            // Car roof
+            ctx.fillRect(18, 15, 28, 15);
+            
+            // Wheels
+            ctx.beginPath();
+            ctx.arc(20, 48, 6, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.arc(44, 48, 6, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Windows (white)
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(20, 18, 10, 10);
+            ctx.fillRect(34, 18, 10, 10);
+            
+            // AMS text
+            ctx.fillStyle = '#dc3545';
+            ctx.font = 'bold 8px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('AMS', 32, 38);
+        }
+        
+        function downloadFavicon() {
+            const link = document.createElement('a');
+            link.download = 'favicon.ico';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+        
+        function downloadPNG() {
+            const link = document.createElement('a');
+            link.download = 'automultiservice-icon.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+        
+        // Generate favicon
+        createFavicon();
+    </script>
+</body>
+</html>
